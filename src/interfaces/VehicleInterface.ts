@@ -1,7 +1,7 @@
-export interface Vehicle {
-  model: string;
-  year: number;
-  color: string;
-  status?: boolean;
-  buyValue: number; 
-}  
+import { z } from 'zod';
+
+import VehicleSchema from '../schema/VehicleSchema';
+
+type Vehicle = z.infer<typeof VehicleSchema>;
+
+export { VehicleSchema, Vehicle }; 

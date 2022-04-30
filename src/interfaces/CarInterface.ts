@@ -1,6 +1,11 @@
-import { Vehicle } from './VehicleInterface';
+import { z } from 'zod';
+import { VehicleSchema } from './VehicleInterface';
 
-export interface Car extends Vehicle {
-  doorsQty: number;
-  seatsQty: number;
-} 
+const CarSchema = VehicleSchema.extend({
+  seatsQty: z.number().min(2),
+  doorsQty: z.number().min(2),
+});
+
+type Car = z.infer<typeof CarSchema>;
+
+export { Car, CarSchema }; 
