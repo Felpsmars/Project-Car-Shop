@@ -1,12 +1,12 @@
 import { ZodError } from 'zod';
-import { IModel } from '../interfaces/ModelInterface';
+import { Model } from '../interfaces/ModelInterface';
 
 export interface ServiceError {
   error: ZodError;
 }
 
 abstract class GenericService<T> {
-  constructor(protected model: IModel<T>) { }
+  constructor(public model: Model<T>) { }
 
   public async read(): Promise<T[]> {
     return this.model.read();

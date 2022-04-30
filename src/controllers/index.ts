@@ -5,7 +5,7 @@ export type ResponseError = {
   error: unknown;
 };
 
-export interface IRequestWithBody<T> extends Request {
+export interface IBodyRequest<T> extends Request {
   body: T;
 }
 
@@ -23,10 +23,14 @@ abstract class GenericController<T> {
 
   constructor(public service: GenericService<T>) {}
 
-  abstract create(
-    req: IRequestWithBody<T>,
-    res: Response<T | ResponseError>,
-  ): Promise<typeof res>;
+  abstract create(req: IBodyRequest<T>, res: Response<T | ResponseError>)
+  : Promise<typeof res>;
+
+  read = async (req: IBodyRequest<T>, res: Response<T[] | ResponseError>)
+  : Promise<typeof res> => {
+    const response = await this.service.read();
+    return res.status(200).json(response);
+  };
 }
 
 export default GenericController; 
