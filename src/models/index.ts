@@ -1,8 +1,8 @@
 import { Model as M, Document } from 'mongoose';
-import { IModel } from '../interfaces/ModelInterface';
+import { Model } from '../interfaces/ModelInterface';
 
-abstract class GenericModel<T> implements IModel<T> {
-  constructor(protected model: M<T & Document>) { }
+abstract class GenericModel<T> implements Model<T> {
+  constructor(public model: M<T & Document>) { }
 
   create = async (obj: T): Promise<T> => this.model.create({ ...obj });
 
