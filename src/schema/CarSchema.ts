@@ -1,7 +1,7 @@
 import { Document, Schema } from 'mongoose';
 import { Car } from '../interfaces/CarInterface';
 
-interface CarDocument extends Car, Document { }
+interface CarDocument extends Car, Document {}
 
 const CarSchema = new Schema<CarDocument>({
   status: Boolean,
